@@ -1,19 +1,28 @@
-import { useRef } from 'react';
+import { connect } from 'react-redux';
 import './App.css';
+import { MainComponent } from './components/mainComponent';
+import { cropImageThunk, uploadImageThunk } from './redux/image-reducer';
 
-function App() {
-  const inputFileRef = useRef(null);
-
-  const clickOnTheInputFile = () => {
-    return inputFileRef.current.click();
-  }
-  
+const App = (props) => {
   return (
-    <div className='App'>
-      <button onClick={clickOnTheInputFile}>SELECT IMAGE</button>
-      <input type='file' ref={inputFileRef} style={{"display": "none"}}></input>
-    </div>
-  );
+    <MainComponent
+      aboutImage = {props.aboutImage}
+      cropProperties = {props.cropProperties}
+      setImagePath = {props.setImagePath}
+      cropImage = {props.cropImage}
+    />)
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    aboutImage: state.image.aboutImage,
+    cropProperties: state.image.cropProperties
+  }
+}
+
+
+export default connect(mapStateToProps, {
+  setImagePath: uploadImageThunk,
+  cropImage: cropImageThunk,
+  uploadImageThunk
+})(App)
