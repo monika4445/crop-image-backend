@@ -2,7 +2,7 @@ import imageService from "../services/image-service.js";
 import path from 'path'
 
 function cropImage(req,res) {
-    
+    console.log(req.body)
     return res.send(imageService.cropImage(req.body));
 }
 

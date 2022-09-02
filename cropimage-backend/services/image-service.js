@@ -2,13 +2,16 @@ import sharp from "sharp";
 import multer from "multer";
 
 
-function cropImage({x, y, width, height}) {
+async function cropImage({x, y, width, height, offsetWidth, offsetHeight}) {
     let originalImage = 'uploads/uploadedFile.jpg';
-    
+
 // file name for cropped image
     let outputImage = 'uploads/croppedImage.jpg';
+    const metadata = await sharp(originalImage).metadata()
+    const divisionOfWidth = metadata.width / offsetWidth;
+    const divisionOfHeight = metadata.height / offsetHeight;
 
-    sharp(originalImage).extract({ width: Math.floor(width), height: Math.floor(height) , left: Math.floor(x), top: Math.floor(y)}).toFile(outputImage)
+    sharp(originalImage).extract({ width: Math.floor(width * divisionOfWidth), height: Math.floor(height * divisionOfHeight) , left: Math.floor(x * divisionOfWidth), top: Math.floor(y * divisionOfHeight)}).toFile(outputImage)
         .then(function(new_file_info) {
             console.log("Image cropped and saved");
         })
