@@ -1,13 +1,39 @@
-import { useState } from "react";
-import { FileUpload } from "./fileUpload";
-import { MakeToEdit } from "./makeToEdit";
+import React, { useState } from "react";
+import { FileUpload } from "./section/fileUpload";
+import { MakeToEdit } from "./section/makeToEdit";
+import '../styles/main.css'
+import { Header } from "./header/header";
+import { MakeForShare } from "./section/makeForShare";
 
 export const MainComponent = (props) => {
     const [isReadyForEdit, setForEdit] = useState();
+    const [isReadyForShare, setForShare] = useState();
   
     return (
       <div className='App'>
-        {isReadyForEdit ? <MakeToEdit aboutImage={props.aboutImage} cropImage = {props.cropImage} /> : <FileUpload setImagePath={props.setImagePath} setForEdit={setForEdit} />}
+        <Header />
+        <section className="home" id="home">
+        {isReadyForShare ? 
+            <MakeForShare 
+              aboutImage={props.aboutImage} 
+              isFetching={props.isFetching}
+            /> :
+        isReadyForEdit ? 
+            <MakeToEdit 
+              aboutImage={props.aboutImage} 
+              isFetching={props.isFetching}
+              cropImage={props.cropImage}
+              getResult={props.getResult}
+              setToFetching={props.setToFetching}
+              setForShare={setForShare} 
+            /> : 
+            <FileUpload 
+              setImagePath={props.setImagePath} 
+              setForEdit={setForEdit} 
+              setToFetching={props.setToFetching}
+            />
+        } 
+        </section>
       </div>
     );
   }

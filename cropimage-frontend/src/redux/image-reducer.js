@@ -1,13 +1,14 @@
-import { cropImagePostRequest, sendImageRequest } from "../api/api";
+import { cropImagePostRequest, sendImageRequest, getCroppedImage } from "../api/api";
 
 const SET_IMAGE_PATH = "SET_IMAGE_PATH";
 const CROP_IMAGE = "CROP_IMAGE";
+const TOGGLE_IS_FETCHING= "TOGGLE_IS_FETCHING";
 
 const initialState = {
     aboutImage: null,
-    cropProperties: null
+    cropProperties: null,
+    isFetching: false
 };
-
 
 export const imageReducer = (state = initialState, action) => {
     switch(action.type) {
@@ -21,6 +22,11 @@ export const imageReducer = (state = initialState, action) => {
                 ...state,
                 cropProperties: {...action.cropProperties}
             }
+        case TOGGLE_IS_FETCHING:
+            return {
+                ...state,
+                isFetching: action.isFetching
+            }
         default:
             return state;
     }
@@ -28,6 +34,7 @@ export const imageReducer = (state = initialState, action) => {
 
 export const setImagePathAC = (data) => ({type: SET_IMAGE_PATH, data})
 export const cropImageAC = (cropProperties) => ({type: CROP_IMAGE, cropProperties})
+export const setToFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching})
 export const cropImageThunk = (cropProperties) => {
     return (dispatch) => {
         cropImagePostRequest(cropProperties).then(res => {
@@ -38,16 +45,23 @@ export const cropImageThunk = (cropProperties) => {
 export const uploadImageThunk = (file) => {
     const data = new FormData();
     const reader = new FileReader();
-
-    reader.readAsDataURL(file)
-    
-
+    reader.readAsDataURL(file);
     data.append('file', file);
+    
     return (dispatch) => {
         return sendImageRequest(data).then(res => {
-            console.log(res)
-            dispatch(setImagePathAC(reader.result));
+            dispatch(setImagePathAC(res.request.responseURL));
+            dispatch(setToFetching(false));
+
         })
     }
+}
 
+export const getCroppedImageThunk = () => {
+    return (dispatch) => {
+        return getCroppedImage().then(res => {
+          dispatch(setImagePathAC(res.request.responseURL))
+          dispatch(setToFetching(false))
+        })
+    }
 }
