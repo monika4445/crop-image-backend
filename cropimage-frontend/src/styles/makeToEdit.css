@@ -1,0 +1,103 @@
+
+.makeToEdit {
+    width: 100%;
+    height: 100%;
+}
+
+.imageForm {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    min-height: 50rem;
+}
+.imagePart {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 5;
+    background-image:  linear-gradient(#9ed7e5 2.4000000000000004px, transparent 2.4000000000000004px), linear-gradient(90deg, #9ed7e5 2.4000000000000004px, transparent 2.4000000000000004px), linear-gradient(#9ed7e5 1.2000000000000002px, transparent 1.2000000000000002px), linear-gradient(90deg, #9ed7e5 1.2000000000000002px, #cfebff 1.2000000000000002px);
+    background-size: 60px 60px, 60px 60px, 12px 12px, 12px 12px;
+    background-position: -2.4000000000000004px -2.4000000000000004px, -2.4000000000000004px -2.4000000000000004px, -1.2000000000000002px -1.2000000000000002px, -1.2000000000000002px -1.2000000000000002px;
+}
+.parentImgForCrop {
+    background-color: black;
+    width: 800px;
+    height: 400px;
+}
+.cropButtonPart {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 4;
+}
+
+
+.cropButton {
+  align-items: center;
+  appearance: none;
+  background-color: #3EB2FD;
+  background-image: linear-gradient(1deg, #4F58FD, #149BF3 99%);
+  background-size: calc(100% + 20px) calc(100% + 20px);
+  border-radius: 100px;
+  border-width: 0;
+  box-shadow: none;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: CircularStd,sans-serif;
+  font-size: 1rem;
+  height: auto;
+  justify-content: center;
+  line-height: 1.5;
+  padding: 6px 20px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color .2s,background-position .2s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: top;
+  white-space: nowrap;
+}
+
+.cropButton:active,
+.cropButton:focus {
+  outline: none;
+}
+
+.cropButton:hover {
+  background-position: -20px -20px;
+}
+
+.cropButton:focus:not(:active) {
+  box-shadow: rgba(40, 170, 255, 0.25) 0 0 0 .125em;
+}
+
+.cropButtonPart > div {
+    border-bottom: ridge;
+    padding-block: 2rem;
+}
+
+.optionsPart {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    justify-content: center;
+}
+.cropOptions {
+    font-size: 3rem;
+}
+
+.optionLabels {
+    font-size: large;
+}
+
+.imageForCrop {
+    width: -webkit-fill-available;
+    /* width: 711.111111111px; */
+    height: -webkit-fill-available;
+}

@@ -1,0 +1,28 @@
+.makeForShare {
+    width: 100%;
+    height: 100%;
+}
+.shareImgPart {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.shareImgParentDiv {
+    width: 500px;
+    height: 500px;
+    background-color: black;
+}
+
+.shareImgParentDiv > img {
+    width: -webkit-fill-available;
+    height: -webkit-fill-available;
+}
+
+.downloadButton {
+    background-color: DodgerBlue;
+    border: none;
+    color: white;
+    padding: 12px 30px;
+    cursor: pointer;
+    font-size: 20px;
+}
