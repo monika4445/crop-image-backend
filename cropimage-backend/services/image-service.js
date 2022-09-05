@@ -3,7 +3,11 @@ import sharp from "sharp";
 async function cropImage({x, y, width, height, offsetWidth, offsetHeight}) {
     let originalImage = 'uploads/uploadedFile.jpg';
     let outputImage = 'uploads/croppedImage.jpg';
-    const metadata = await sharp(originalImage).metadata()
+    try {
+        const metadata = await sharp(originalImage).metadata();
+        } catch(error) {
+    console.log(`An error occurred during processing: ${error}`);
+  }
     const divisionOfWidth = metadata.width / offsetWidth;
     const divisionOfHeight = metadata.height / offsetHeight;
 
