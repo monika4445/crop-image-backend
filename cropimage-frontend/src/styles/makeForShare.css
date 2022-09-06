@@ -15,11 +15,10 @@
 }
 
 .shareImgParentDiv > img {
-    /* max-width: -webkit-fill-available;
-    max-height: -webkit-fill-available; */
     object-fit: contain;
     height: 100%;
     width: 100%;
+    padding: 1.5rem;
 }
 
 .downloadButton {
@@ -60,4 +59,13 @@
   display: flex;
   gap: 0.2rem;
   align-items: center;
+}
+.errorText {
+    color: #e62143;
+    font-size: large;
+}
+.buttPar {
+    margin-top: 3rem;
+    display: flex;
+    justify-content: center;
 }

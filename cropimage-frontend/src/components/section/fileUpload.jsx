@@ -124,7 +124,7 @@ export const FileUpload = (props) => {
                 <button className="btn" onClick={handleOpenPicker}> Select Image From Google Drive <span className="fas fa-chevron-right"></span> </button>
             </div>
             <div className="dragDiv">
-                <h3>Drag your file here</h3>
+                <h3>Drop your file here</h3>
                 <div onDragOver={dragOver} onDragLeave={dragLeaveHandler} onDrop={dropHandler} className="drag-area">
                     <div className="icon">
                     <i className="fas fa-images"></i>

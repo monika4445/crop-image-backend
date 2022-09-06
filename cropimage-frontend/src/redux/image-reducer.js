@@ -3,6 +3,7 @@ import { cropImagePostRequest, sendImageRequest, getCroppedImage, deleteImg } fr
 const SET_IMAGE_PATH = "SET_IMAGE_PATH";
 const CROP_IMAGE = "CROP_IMAGE";
 const TOGGLE_IS_FETCHING= "TOGGLE_IS_FETCHING";
+const SET_ERRORS = "SET_ERRORS";
 
 const initialState = {
     aboutImage: {
@@ -10,7 +11,8 @@ const initialState = {
         filename: null
     },
     cropProperties: null,
-    isFetching: false
+    isFetching: false,
+    error: null
 };
 
 export const imageReducer = (state = initialState, action) => {
@@ -33,6 +35,11 @@ export const imageReducer = (state = initialState, action) => {
                 ...state,
                 isFetching: action.isFetching
             }
+        case SET_ERRORS: 
+            return {
+                ...state,
+                error: action.error
+            }
         default:
             return state;
     }
@@ -41,6 +48,7 @@ export const imageReducer = (state = initialState, action) => {
 export const setImagePathAC = (data) => ({type: SET_IMAGE_PATH, data})
 export const cropImageAC = (cropProperties) => ({type: CROP_IMAGE, cropProperties})
 export const setToFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching})
+export const createErrorAC = (error) => ({type: SET_ERRORS, error})
 
 export const uploadImageThunk = (file) => {
     const data = new FormData();
@@ -58,6 +66,9 @@ export const cropImageThunk = (cropProperties) => {
     return (dispatch) => {
         cropImagePostRequest(cropProperties).then(res => {
             return dispatch(cropImageAC(cropProperties))
+        }).catch(res => {
+            dispatch(createErrorAC(res.response.data.message));
+            dispatch(setToFetching(false));
         })
     }
 }

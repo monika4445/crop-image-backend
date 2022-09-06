@@ -13,7 +13,7 @@ const storage = multer.diskStorage({
 );
 const upload = multer({storage})
 
-router.post('/upload', upload.single('file'), imageController.uploadImage)
+router.post('/upload', upload.single('file'), imageController.uploadImage )
 router.get('/upload/:filename', imageController.getImage)
 router.get('/result/:filename', imageController.getResult)
 router.post('/crop', imageController.cropImage)

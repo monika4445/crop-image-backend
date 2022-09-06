@@ -2,8 +2,13 @@ import imageService from "../services/image-service.js";
 import path from 'path'
 import fs from 'fs'
 
-function cropImage(req,res) {
-    return res.send(imageService.cropImage(req.body))
+async function cropImage(req, res, next) {
+    try {
+        res.send(await imageService.cropImage(req.body));
+    } catch(e) {
+        console.log(e,4646546464)
+        res.status(406).send({message: e.error.message})
+    }
 }
 
 function uploadImage(req, res) {

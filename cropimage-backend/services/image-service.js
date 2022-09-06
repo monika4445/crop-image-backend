@@ -1,8 +1,16 @@
 import sharp from "sharp";
+import { ValidationError, DatabaseError, ProcessError} from '../errors/error-handler.js'
 
 async function cropImage({x, y, width, height, offsetWidth, offsetHeight, filename}) {
     let originalImage = `uploads/${filename}`;
     let outputImage = `uploads/cropped${filename}`;
+
+    if (!offsetWidth || !offsetHeight){
+            throw new ValidationError().toJSON();
+        }
+    if (!originalImage){
+        throw new DatabaseError().toJSON();
+    }
     
     try {
         const metadata = await sharp(originalImage).metadata();
@@ -30,7 +38,8 @@ async function cropImage({x, y, width, height, offsetWidth, offsetHeight, filena
             });
         }
     } catch(error) {
-        return new Error(`An error occurred during processing: ${error}`);
+        console.log("hsdhashdhasd")
+        throw new ProcessError(402, `An error occurred during processing: ${error.message}`).toJSON();
   }
 }
 

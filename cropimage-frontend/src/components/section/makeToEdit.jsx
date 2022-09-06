@@ -14,7 +14,6 @@ export const MakeToEdit = (props) => {
         height: 50
     });
     const imageRef = useRef(null);
-    const [toCrop, setToCrop] = useState(null);
 
     const setToCropImage = (e) => {
         setCropCoordinates(e)
@@ -22,11 +21,9 @@ export const MakeToEdit = (props) => {
 
     const submitHandler = (e) => {
         e.preventDefault()
-        const {offsetWidth, offsetHeight} = imageRef.current;
 
-        setToCrop(true)
-
-        return props.cropImage({...cropCoordinates, offsetWidth, offsetHeight, filename: props.aboutImage.filename});
+        props.setForShare(true)
+        props.setToFetching(true)
     }
 
     const changeCropValue = (e) => {
@@ -47,14 +44,13 @@ export const MakeToEdit = (props) => {
         return setCropCoordinates({
                 ...cropCoordinates,
                 [e.target.name] : e.target.value
-                
             })
     }
 
     const croppedResultHandler = (e) => {
-        props.setForShare(true)
-        props.getResult(props.aboutImage.filename);
-        props.setToFetching(true)
+        const {offsetWidth, offsetHeight} = imageRef.current;
+
+        return props.cropImage({...cropCoordinates, offsetWidth, offsetHeight, filename: props.aboutImage.filename});
     }
 
     return (
@@ -63,30 +59,29 @@ export const MakeToEdit = (props) => {
             <div>
                 <Loader />
             </div> :
-            
             <form className='imageForm' onSubmit={submitHandler}>
                 <div className='imagePart'>
                     <ReactCrop crop={cropCoordinates} onChange={setToCropImage} className="parentImgForCrop" >
                         <img className='imageForCrop' src={props.aboutImage.imgPath} alt="imgForCropping" ref={imageRef}/>
                     </ReactCrop>
                 </div>
-            
-                <div className='cropButtonPart'>
-                    <div className='cropOptions'>
-                        CROP OPTIONS
+                <div className='cropPart'>
+                    <div className='cropOptionsPart'>
+                        <div className='cropOptions'>
+                            CROP OPTIONS
+                        </div>
+                        <div className='optionsPart'>
+                            <label htmlFor='width' className='optionLabels'>Width(px)</label>
+                            <input className="numberstyle" type="number"  name='width' min="1" step="1"  onChange={changeCropValue} value={cropCoordinates ? Math.round(cropCoordinates.width) : 0} />
+                        </div>
+                        <div className='optionsPart'>
+                            <label htmlFor='height' className='optionLabels'>Height(px)</label>
+                            <input className="numberstyle" type="number" name='height' min="1" step="1" onChange={changeCropValue} value={cropCoordinates ? Math.round(cropCoordinates.height) : 0}/>
+                        </div>
+                     </div>
+                    <div className='cropButtonDiv'>
+                            <button type='submit' onClick={croppedResultHandler} className='cropButton'>CROP</button>
                     </div>
-                    <div className='optionsPart'>
-                        <label htmlFor='width' className='optionLabels'>Width(px)</label>
-                        <input className="numberstyle" type="number"  name='width' min="1" step="1"  onChange={changeCropValue} value={cropCoordinates ? Math.round(cropCoordinates.width) : 0} />
-                    </div>
-                    <div className='optionsPart'>
-                        <label htmlFor='height' className='optionLabels'>Height(px)</label>
-                        <input className="numberstyle" type="number" name='height' min="1" step="1" onChange={changeCropValue} value={cropCoordinates ? Math.round(cropCoordinates.height) : 0}/>
-                    </div>
-                    <button className='cropButton'>CROP</button>
-                    {toCrop &&  
-                        <button type='submit' onClick={croppedResultHandler}>SHOW RESULT</button>
-                    }
                 </div>
             </form>
             }

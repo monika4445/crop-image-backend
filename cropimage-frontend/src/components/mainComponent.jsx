@@ -16,15 +16,16 @@ export const MainComponent = (props) => {
         {isReadyForShare ? 
             <MakeForShare 
               aboutImage={props.aboutImage} 
+              error={props.error}
               isFetching={props.isFetching}
               deleteImg={props.deleteImg}
+              getResult={props.getResult}
             /> :
         isReadyForEdit ? 
             <MakeToEdit 
               aboutImage={props.aboutImage} 
               isFetching={props.isFetching}
               cropImage={props.cropImage}
-              getResult={props.getResult}
               setToFetching={props.setToFetching}
               setForShare={setForShare} 
             /> : 

@@ -9,6 +9,7 @@ const App = (props) => {
     <MainComponent
       aboutImage = {props.aboutImage}
       isFetching = {props.isFetching}
+      error = {props.error}
       cropProperties = {props.cropProperties}
       setImagePath = {props.setImagePath}
       cropImage = {props.cropImage}
@@ -22,7 +23,8 @@ const mapStateToProps = (state) => {
   return {
     aboutImage: state.image.aboutImage,
     cropProperties: state.image.cropProperties,
-    isFetching: state.image.isFetching
+    isFetching: state.image.isFetching,
+    error: state.image.error
   }
 }
 
@@ -32,5 +34,4 @@ export default connect(mapStateToProps, {
   getResult: getCroppedImageThunk,
   deleteImg: deleteImagesThunk,
   setToFetching,
-
 })(App)

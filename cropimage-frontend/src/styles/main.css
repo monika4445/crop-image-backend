@@ -19,5 +19,6 @@ section:nth-child(even){
     justify-content: center;
     height: 100%;
     width: 100%;
+    min-height: 35rem;
 }
 
