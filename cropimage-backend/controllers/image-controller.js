@@ -3,7 +3,7 @@ import path from 'path'
 import fs from 'fs'
 
 function cropImage(req,res) {
-    return res.send(imageService.cropImage(req.cropImage))
+    return res.send(imageService.cropImage(req.body))
 }
 
 function uploadImage(req, res) {
