@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import './App.css';
 import { MainComponent } from './components/mainComponent';
-import { cropImageThunk, uploadImageThunk, getCroppedImageThunk, setToFetching } from './redux/image-reducer';
+import { cropImageThunk, uploadImageThunk, getCroppedImageThunk, setToFetching, deleteImagesThunk } from './redux/image-reducer';
 
 const App = (props) => {
   return (
@@ -13,6 +13,7 @@ const App = (props) => {
       setImagePath = {props.setImagePath}
       cropImage = {props.cropImage}
       getResult = {props.getResult}
+      deleteImg = {props.deleteImg}
       setToFetching = {props.setToFetching}
     />)
 }
@@ -29,5 +30,7 @@ export default connect(mapStateToProps, {
   setImagePath: uploadImageThunk,
   cropImage: cropImageThunk,
   getResult: getCroppedImageThunk,
-  setToFetching
+  deleteImg: deleteImagesThunk,
+  setToFetching,
+
 })(App)

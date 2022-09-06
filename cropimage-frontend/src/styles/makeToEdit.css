@@ -16,20 +16,20 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-grow: 5;
+    width: 70%;
     background-image:  linear-gradient(#9ed7e5 2.4000000000000004px, transparent 2.4000000000000004px), linear-gradient(90deg, #9ed7e5 2.4000000000000004px, transparent 2.4000000000000004px), linear-gradient(#9ed7e5 1.2000000000000002px, transparent 1.2000000000000002px), linear-gradient(90deg, #9ed7e5 1.2000000000000002px, #cfebff 1.2000000000000002px);
     background-size: 60px 60px, 60px 60px, 12px 12px, 12px 12px;
     background-position: -2.4000000000000004px -2.4000000000000004px, -2.4000000000000004px -2.4000000000000004px, -1.2000000000000002px -1.2000000000000002px, -1.2000000000000002px -1.2000000000000002px;
 }
 .parentImgForCrop {
-    background-color: black;
-    width: 800px;
+    width: auto;
     height: 400px;
 }
+
 .cropButtonPart {
     display: flex;
     flex-direction: column;
-    flex-grow: 4;
+    width: 30%;
 }
 
 
@@ -97,7 +97,12 @@
 }
 
 .imageForCrop {
-    width: -webkit-fill-available;
-    /* width: 711.111111111px; */
-    height: -webkit-fill-available;
+    width: inherit;
+    height: inherit;
+}
+
+.ReactCrop__child-wrapper {
+    height: inherit;
+    display: flex;
+    justify-content: center;
 }

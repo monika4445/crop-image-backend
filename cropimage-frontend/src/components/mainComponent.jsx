@@ -17,6 +17,7 @@ export const MainComponent = (props) => {
             <MakeForShare 
               aboutImage={props.aboutImage} 
               isFetching={props.isFetching}
+              deleteImg={props.deleteImg}
             /> :
         isReadyForEdit ? 
             <MakeToEdit 

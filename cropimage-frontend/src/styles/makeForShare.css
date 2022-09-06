@@ -1,6 +1,6 @@
 .makeForShare {
     width: 100%;
-    height: 100%;
+    min-height: fit-content;
 }
 .shareImgPart {
     display: flex;
@@ -10,12 +10,16 @@
 .shareImgParentDiv {
     width: 500px;
     height: 500px;
-    background-color: black;
+    display: flex;
+    align-items: center;
 }
 
 .shareImgParentDiv > img {
-    width: -webkit-fill-available;
-    height: -webkit-fill-available;
+    /* max-width: -webkit-fill-available;
+    max-height: -webkit-fill-available; */
+    object-fit: contain;
+    height: 100%;
+    width: 100%;
 }
 
 .downloadButton {
@@ -25,4 +29,35 @@
     padding: 12px 30px;
     cursor: pointer;
     font-size: 20px;
+}
+
+.boxPart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.social-buttons {
+   display: flex;
+   gap: 1.5rem;
+}
+
+.sharePart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    gap: 2.5rem;
+}
+.startButton {
+  background: #e62143;
+  border: none;
+  color: white;
+  padding: 12px 30px;
+  cursor: pointer;
+  font-size: 17px;
+  border-radius: 1rem;
+  display: flex;
+  gap: 0.2rem;
+  align-items: center;
 }

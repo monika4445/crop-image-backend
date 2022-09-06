@@ -26,7 +26,7 @@ export const MakeToEdit = (props) => {
 
         setToCrop(true)
 
-        return props.cropImage({...cropCoordinates, offsetWidth, offsetHeight});
+        return props.cropImage({...cropCoordinates, offsetWidth, offsetHeight, filename: props.aboutImage.filename});
     }
 
     const changeCropValue = (e) => {
@@ -53,17 +53,8 @@ export const MakeToEdit = (props) => {
 
     const croppedResultHandler = (e) => {
         props.setForShare(true)
-        props.getResult();
+        props.getResult(props.aboutImage.filename);
         props.setToFetching(true)
-    }
-
-    const loadImg = (e) => {
-        const { naturalWidth, naturalHeight, offsetHeight, offsetWidth} = e.target;
-
-        if (naturalWidth > naturalHeight) {
-            imageRef.current.style.width = offsetWidth;
-            imageRef.current.style.height = (naturalWidth / naturalHeight) * offsetHeight;
-        }
     }
 
     return (
@@ -75,8 +66,8 @@ export const MakeToEdit = (props) => {
             
             <form className='imageForm' onSubmit={submitHandler}>
                 <div className='imagePart'>
-                    <ReactCrop crop={cropCoordinates} onChange={setToCropImage} className="parentImgForCrop">
-                        <img className='imageForCrop' src={props.aboutImage} onLoad={loadImg} alt="imgForCropping" ref={imageRef}/>
+                    <ReactCrop crop={cropCoordinates} onChange={setToCropImage} className="parentImgForCrop" >
+                        <img className='imageForCrop' src={props.aboutImage.imgPath} alt="imgForCropping" ref={imageRef}/>
                     </ReactCrop>
                 </div>
             
@@ -86,15 +77,15 @@ export const MakeToEdit = (props) => {
                     </div>
                     <div className='optionsPart'>
                         <label htmlFor='width' className='optionLabels'>Width(px)</label>
-                        <input className="numberstyle" type="number"  name='width' min="1" step="1"  onChange={changeCropValue} value={cropCoordinates ? cropCoordinates.width : 0} />
+                        <input className="numberstyle" type="number"  name='width' min="1" step="1"  onChange={changeCropValue} value={cropCoordinates ? Math.round(cropCoordinates.width) : 0} />
                     </div>
                     <div className='optionsPart'>
                         <label htmlFor='height' className='optionLabels'>Height(px)</label>
-                        <input className="numberstyle" type="number" name='height' min="1" step="1" onChange={changeCropValue} value={cropCoordinates ? cropCoordinates.height : 0}/>
+                        <input className="numberstyle" type="number" name='height' min="1" step="1" onChange={changeCropValue} value={cropCoordinates ? Math.round(cropCoordinates.height) : 0}/>
                     </div>
-                    <button className='cropButton' type='submit'>CROP</button>
+                    <button className='cropButton'>CROP</button>
                     {toCrop &&  
-                        <button onClick={croppedResultHandler}>SEE RESULT</button>
+                        <button type='submit' onClick={croppedResultHandler}>SHOW RESULT</button>
                     }
                 </div>
             </form>

@@ -1,11 +1,14 @@
-import { cropImagePostRequest, sendImageRequest, getCroppedImage } from "../api/api";
+import { cropImagePostRequest, sendImageRequest, getCroppedImage, deleteImg } from "../api/api";
 
 const SET_IMAGE_PATH = "SET_IMAGE_PATH";
 const CROP_IMAGE = "CROP_IMAGE";
 const TOGGLE_IS_FETCHING= "TOGGLE_IS_FETCHING";
 
 const initialState = {
-    aboutImage: null,
+    aboutImage: {
+        imgPath: null,
+        filename: null
+    },
     cropProperties: null,
     isFetching: false
 };
@@ -15,7 +18,10 @@ export const imageReducer = (state = initialState, action) => {
         case SET_IMAGE_PATH:
             return {
                 ...state,
-                aboutImage: action.data
+                aboutImage: { 
+                    ...state.aboutImage,
+                    ...action.data
+                }
             }
         case CROP_IMAGE: 
             return {
@@ -35,33 +41,38 @@ export const imageReducer = (state = initialState, action) => {
 export const setImagePathAC = (data) => ({type: SET_IMAGE_PATH, data})
 export const cropImageAC = (cropProperties) => ({type: CROP_IMAGE, cropProperties})
 export const setToFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching})
-export const cropImageThunk = (cropProperties) => {
-    return (dispatch) => {
-        cropImagePostRequest(cropProperties).then(res => {
-            return dispatch(cropImageAC)
-        })
-    }
-}
+
 export const uploadImageThunk = (file) => {
     const data = new FormData();
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    data.append('file', file);
+    data.append('file', file, file.name);
     
     return (dispatch) => {
         return sendImageRequest(data).then(res => {
-            dispatch(setImagePathAC(res.request.responseURL));
+            dispatch(setImagePathAC({imgPath: res.request.responseURL, filename: file.name}));
             dispatch(setToFetching(false));
-
         })
     }
 }
 
-export const getCroppedImageThunk = () => {
+export const cropImageThunk = (cropProperties) => {
     return (dispatch) => {
-        return getCroppedImage().then(res => {
-          dispatch(setImagePathAC(res.request.responseURL))
+        cropImagePostRequest(cropProperties).then(res => {
+            return dispatch(cropImageAC(cropProperties))
+        })
+    }
+}
+
+export const getCroppedImageThunk = (filename) => {
+    return (dispatch) => {
+        return getCroppedImage(filename).then(res => {
+          dispatch(setImagePathAC({imgPath: res.request.responseURL}))
           dispatch(setToFetching(false))
         })
+    }
+}
+
+export const deleteImagesThunk = (filename) => {
+    return (dispatch) => {
+        return deleteImg(filename)
     }
 }

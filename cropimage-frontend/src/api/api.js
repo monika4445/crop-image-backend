@@ -12,12 +12,16 @@ export const getUploadedImg = (imgName) => {
     return axios.get(`image/upload/${imgName}`)
 }
 
-export const getCroppedImage = () => {
-    return axios.get('image/result')
+export const getCroppedImage = (filename) => {
+    return axios.get(`image/result/${filename}`)
 }
 
 export const downloadImage = () => {
     return axios.get("image/download")
+}
+
+export const deleteImg = (filename) => {
+    return axios.delete(`image/${filename}`)
 }
 
 
