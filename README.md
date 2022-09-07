@@ -1,5 +1,7 @@
 # Quicktools-CropImage
 
+![home-img](https://user-images.githubusercontent.com/86877899/188961936-85cce7d3-a048-4ed2-8d0b-9b2d6e83c0c4.png)
+
 # What Does the Image Cropping Tool Do?
 If you’d prefer to crop pictures to eliminate unwanted objects, you can do that instantly with this image cropping tool. 
 Our online image cropping tool allows you to select an area of a digital photo and delete everything outside of the chosen location. It transforms your images into the perfect size in seconds.
