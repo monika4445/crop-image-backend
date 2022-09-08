@@ -16,6 +16,7 @@ import {
 
 export const MakeForShare = (props) => {
     const imgForShreRef = useRef(null);
+    const mainPath = "http://localhost:4000/image";
 
     useEffect(() => {
         props.getResult(props.aboutImage.filename);
@@ -50,23 +51,23 @@ export const MakeForShare = (props) => {
                                 <button className='startButton' onClick={startNewHandler}>TRY AGAIN <VscDebugRestart/></button>
                             </div>
                             <div className='downloadDiv'>
-                                <a href={`http://localhost:4000/image/download/${props.aboutImage.filename}`} className="downloadButton" download>Download <FaDownload/></a>
+                                <a href={`${mainPath}/download/${props.aboutImage.filename}`} className="downloadButton" download>Download <FaDownload/></a>
                             </div>
                             <div className="shareBox">
                                 <div className="box-container">
                                     <div className="boxPart">
                                         <h3>Share Your Image</h3>
                                         <ul className="social-buttons">
-                                            <FacebookShareButton url={`http://localhost:4000/image/result/${props.aboutImage.filename}`}>
+                                            <FacebookShareButton url={`${mainPath}/result/${props.aboutImage.filename}`}>
                                                 <FacebookIcon size={40} round={true} />
                                             </FacebookShareButton>
-                                            <PinterestShareButton url={`http://localhost:4000/image/result/${props.aboutImage.filename}`}>
+                                            <PinterestShareButton url={`${mainPath}/result/${props.aboutImage.filename}`}>
                                                 <PinterestIcon size={40} round={true} />
                                             </PinterestShareButton>
-                                            <RedditShareButton url={`http://localhost:4000/image/result/${props.aboutImage.filename}`}>
+                                            <RedditShareButton url={`${mainPath}/result/${props.aboutImage.filename}`}>
                                                 <RedditIcon size={40} round={true} />
                                             </RedditShareButton>
-                                            <VKShareButton url={`http://localhost:4000/image/result/${props.aboutImage.filename}`}>
+                                            <VKShareButton url={`${mainPath}/result/${props.aboutImage.filename}`}>
                                                 <VKIcon size={40} round={true} />
                                             </VKShareButton>
                                         </ul>
