@@ -2,6 +2,7 @@ A simple straightforward customizable mobile-friendly image cropping tool
 
 # Features
 • Drag and drop it into widget, or load with file select dialog
+
   • Select image from 
     • Dropbox
     • Google Drive
