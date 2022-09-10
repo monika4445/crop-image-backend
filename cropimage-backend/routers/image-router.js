@@ -11,13 +11,13 @@ const storage = multer.diskStorage({
         }
     }
 );
-const upload = multer({storage})
+const upload = multer({storage});
 
-router.post('/upload', upload.single('file'), imageController.uploadImage )
-router.get('/upload/:filename', imageController.getImage)
-router.get('/result/:filename', imageController.getResult)
-router.post('/crop', imageController.cropImage)
-router.get('/download/:filename', imageController.downloadImage)
-router.delete('/:filename', imageController.deleteImg)
+router.post('/upload', upload.single('file'), imageController.uploadImage);
+router.get('/upload/:filename', imageController.getImage);
+router.get('/result/:filename', imageController.getResult);
+router.post('/crop', imageController.cropImage);
+router.get('/download/:filename', imageController.downloadImage);
+router.delete('/:filename', imageController.deleteImg);
 
-export default router
+export default router;

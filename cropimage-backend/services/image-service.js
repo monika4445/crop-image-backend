@@ -55,5 +55,5 @@ async function cropImage({
 }
 
 export default {
-  cropImage,
+  cropImage
 };
