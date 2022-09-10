@@ -14,60 +14,53 @@ import {
     VKIcon
   } from "react-share";
 
-export const MakeForShare = (props) => {
+export const MakeForShare = ({aboutImage, deleteImg, isFetching, getResult }) => {
     const imgForShreRef = useRef(null);
-    const mainPath = "http://localhost:4000/image";
+    const mainPath = process.env.REACT_APP_MAIN_REQ_ROOT;
 
     useEffect(() => {
-        props.getResult(props.aboutImage.filename);
+        getResult(aboutImage.filename);
     },[])
 
     const startNewHandler = () => {
-        props.deleteImg(props.aboutImage.filename);
+        deleteImg(aboutImage.filename);
 
         window.location.reload(false) 
     }
 
     return (
         <div className='makeForShare'> 
-            {props.isFetching ? 
+            {isFetching ? 
                 <div>
                     <Loader />
-                </div> : 
-                props.error ? 
-                    (<div>
-                        <p className='errorText'>{props.error}</p>
-                        <div className='buttPar'>
-                            <button className='startButton' onClick={startNewHandler}>TRY AGAIN <VscDebugRestart/></button>
-                        </div>
-                    </div>) :
+                </div> :
                 <>
                     <div className='shareImgPart'>
                         <div className='shareImgParentDiv'>
-                            <img src={props.aboutImage.imgPath} alt="croppedImage" ref={imgForShreRef}/>
+                            <img src={aboutImage.imgPath} alt="croppedImage" ref={imgForShreRef}/>
                         </div>
                         <div className='sharePart'>
                             <div className='startNewDiv'>
                                 <button className='startButton' onClick={startNewHandler}>TRY AGAIN <VscDebugRestart/></button>
                             </div>
                             <div className='downloadDiv'>
-                                <a href={`${mainPath}/download/${props.aboutImage.filename}`} className="downloadButton" download>Download <FaDownload/></a>
+                                <a href={`${mainPath}/download/${aboutImage.filename}`} className="downloadButton" download>Download <FaDownload/></a>
                             </div>
                             <div className="shareBox">
                                 <div className="box-container">
                                     <div className="boxPart">
                                         <h3>Share Your Image</h3>
                                         <ul className="social-buttons">
-                                            <FacebookShareButton url={`${mainPath}/result/${props.aboutImage.filename}`}>
+                                            <FacebookShareButton url={`${mainPath}/result/${aboutImage.filename}`}>
                                                 <FacebookIcon size={40} round={true} />
                                             </FacebookShareButton>
-                                            <PinterestShareButton url={`${mainPath}/result/${props.aboutImage.filename}`}>
+                                            <PinterestShareButton url={`${mainPath}/result/${aboutImage.filename}`}>
                                                 <PinterestIcon size={40} round={true} />
                                             </PinterestShareButton>
-                                            <RedditShareButton url={`${mainPath}/result/${props.aboutImage.filename}`}>
+                                            <RedditShareButton url={`${mainPath}/result/${aboutImage.filename}`}>
                                                 <RedditIcon size={40} round={true} />
                                             </RedditShareButton>
-                                            <VKShareButton url={`${mainPath}/result/${props.aboutImage.filename}`}>
+                                            <VKShareButton url={`${mainPath}/result/${aboutImage.filename}`}>
                                                 <VKIcon size={40} round={true} />
                                             </VKShareButton>
                                         </ul>

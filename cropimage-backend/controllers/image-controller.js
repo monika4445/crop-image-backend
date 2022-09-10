@@ -27,8 +27,12 @@ function downloadImage(req, res) {
 }
 
 function deleteImg(req, res) {
-  fs.unlinkSync(path.resolve(`uploads/${req.params.filename}`));
-  fs.unlinkSync(path.resolve(`uploads/cropped${req.params.filename}`));
+  if (fs.existsSync(path.resolve(`uploads/${req.params.filename}`))) {
+    fs.unlinkSync(path.resolve(`uploads/${req.params.filename}`));
+  }
+  if (fs.existsSync(path.resolve(`uploads/cropped${req.params.filename}`))) {
+    fs.unlinkSync(path.resolve(`uploads/cropped${req.params.filename}`));
+  }
 }
 
 export default {

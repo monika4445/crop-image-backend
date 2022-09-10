@@ -20,10 +20,11 @@ export const MakeToEdit = (props) => {
     }
 
     const submitHandler = (e) => {
-        e.preventDefault()
+        e.preventDefault();
+        const {offsetWidth, offsetHeight} = imageRef.current;
 
-        props.setForShare(true)
-        props.setToFetching(true)
+        props.cropImage({...cropCoordinates, offsetWidth, offsetHeight, filename: props.aboutImage.filename});
+        props.setToFetching(true);
     }
 
     const changeCropValue = (e) => {
@@ -46,13 +47,6 @@ export const MakeToEdit = (props) => {
                 [e.target.name] : e.target.value
             })
     }
-
-    const croppedResultHandler = (e) => {
-        const {offsetWidth, offsetHeight} = imageRef.current;
-
-        return props.cropImage({...cropCoordinates, offsetWidth, offsetHeight, filename: props.aboutImage.filename});
-    }
-
     return (
         <div className='makeToEdit'>
             {props.isFetching ? 
@@ -80,7 +74,7 @@ export const MakeToEdit = (props) => {
                         </div>
                      </div>
                     <div className='cropButtonDiv'>
-                            <button type='submit' onClick={croppedResultHandler} className='cropButton'>CROP</button>
+                            <button type='submit' className='cropButton'>CROP</button>
                     </div>
                 </div>
             </form>

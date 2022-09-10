@@ -4,37 +4,38 @@ import { MakeToEdit } from "./section/makeToEdit";
 import '../styles/main.css'
 import { Header } from "./header/header";
 import { MakeForShare } from "./section/makeForShare";
+import { ErrorComponent } from "./errorComponent";
 
-export const MainComponent = (props) => {
-    const [isReadyForEdit, setForEdit] = useState();
-    const [isReadyForShare, setForShare] = useState();
+export const MainComponent = ({aboutImage, error, isFetching, deleteImg, isReadyForShare, getResult, setToFetching, cropImage, setImagePath}) => {
+    const [isReadyForEdit, setForEdit] = useState(false);
   
     return (
       <div className='App'>
         <Header />
         <section className="home" id="home">
-        {isReadyForShare ? 
+          {error ? 
+            <ErrorComponent error ={error} deleteImg={deleteImg} aboutImage={aboutImage}
+            />  
+          : isReadyForShare ? 
             <MakeForShare 
-              aboutImage={props.aboutImage} 
-              error={props.error}
-              isFetching={props.isFetching}
-              deleteImg={props.deleteImg}
-              getResult={props.getResult}
+              aboutImage={aboutImage} 
+              isFetching={isFetching}
+              deleteImg={deleteImg}
+              getResult={getResult}
             /> :
-        isReadyForEdit ? 
+          isReadyForEdit ? 
             <MakeToEdit 
-              aboutImage={props.aboutImage} 
-              isFetching={props.isFetching}
-              cropImage={props.cropImage}
-              setToFetching={props.setToFetching}
-              setForShare={setForShare} 
+              aboutImage={aboutImage} 
+              isFetching={isFetching}
+              cropImage={cropImage}
+              setToFetching={setToFetching}
             /> : 
             <FileUpload 
-              setImagePath={props.setImagePath} 
+              setImagePath={setImagePath} 
               setForEdit={setForEdit} 
-              setToFetching={props.setToFetching}
+              setToFetching={setToFetching}
             />
-        } 
+          }
         </section>
       </div>
     );

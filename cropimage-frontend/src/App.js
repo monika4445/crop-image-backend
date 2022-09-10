@@ -10,6 +10,7 @@ const App = (props) => {
       aboutImage = {props.aboutImage}
       isFetching = {props.isFetching}
       error = {props.error}
+      isReadyForShare = {props.isReadyForShare}
       cropProperties = {props.cropProperties}
       setImagePath = {props.setImagePath}
       cropImage = {props.cropImage}
@@ -24,6 +25,7 @@ const mapStateToProps = (state) => {
     aboutImage: state.image.aboutImage,
     cropProperties: state.image.cropProperties,
     isFetching: state.image.isFetching,
+    isReadyForShare: state.image.isReadyForShare,
     error: state.image.error
   }
 }
