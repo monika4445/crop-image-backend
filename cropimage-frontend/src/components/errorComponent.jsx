@@ -6,7 +6,7 @@ export const ErrorComponent = ({error, deleteImg, aboutImage}) => {
     const startNewHandler = () => {
         deleteImg(aboutImage.filename);
 
-        window.location.reload(false) 
+        window.location.reload(false); 
     }
 
     return (  

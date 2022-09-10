@@ -16,7 +16,7 @@ export const MakeToEdit = (props) => {
     const imageRef = useRef(null);
 
     const setToCropImage = (e) => {
-        setCropCoordinates(e)
+        setCropCoordinates(e);
     }
 
     const submitHandler = (e) => {

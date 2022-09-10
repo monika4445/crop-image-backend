@@ -6,12 +6,12 @@ import useDrivePicker from 'react-google-drive-picker'
 
 export const FileUpload = (props) => {
     const inputFileRef = useRef(null);
+    const oauthToken = useRef(null);
     const dropboxApyKey = process.env.REACT_APP_DROPBOX_API_KEY;
     const googleDriveKey = process.env.REACT_APP_GOOGLE_DRIVE_KEY;
     const googleClientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
     const [openPicker, authResult] = useDrivePicker();
-    const oauthToken = useRef(null);
-
+    
     useEffect(() => {
         if (authResult) {
           oauthToken.current = authResult.access_token;

@@ -25,7 +25,7 @@ export const MakeForShare = ({aboutImage, deleteImg, isFetching, getResult }) =>
     const startNewHandler = () => {
         deleteImg(aboutImage.filename);
 
-        window.location.reload(false) 
+        window.location.reload(false); 
     }
 
     return (
